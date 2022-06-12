@@ -16,17 +16,17 @@
 
 
 
-    <meta name="description" content="主機環境 操作系统: Ubuntu 16.04.7 LTS 内核版本: Linux 4.15.0-142-generic docker-compose版本: v1.29.1">
+    <meta name="description" content="簡介 本篇針對docker-compose建構airflow+mysql+rabbitmq的環境 airflow基礎介紹可參考: https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;MzI2MTQzNjQ5Ng&#x3D;&#x3D;&amp;mid&#x3D;2247493044&amp;idx&#x3D;1&amp;sn&#x3D;f80065cc064a08f7a2b9cedbd5c1a9d8&amp;chksm&#x3D;ea58c0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Airflow with docker compose (airflow+mysql+rabbitmq) 單機">
 <meta property="og:url" content="https://dawn0472.github.io/articles/2022/06/07/Airflow-with-docker-compose-airflow-mysql-rabbitmq-%E5%96%AE%E6%A9%9F/index.html">
 <meta property="og:site_name" content="Dawn的技術部落格">
-<meta property="og:description" content="主機環境 操作系统: Ubuntu 16.04.7 LTS 内核版本: Linux 4.15.0-142-generic docker-compose版本: v1.29.1">
+<meta property="og:description" content="簡介 本篇針對docker-compose建構airflow+mysql+rabbitmq的環境 airflow基礎介紹可參考: https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s?__biz&#x3D;MzI2MTQzNjQ5Ng&#x3D;&#x3D;&amp;mid&#x3D;2247493044&amp;idx&#x3D;1&amp;sn&#x3D;f80065cc064a08f7a2b9cedbd5c1a9d8&amp;chksm&#x3D;ea58c0">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/07/Airflow-with-docker-compose-airflow-mysql-rabbitmq-%E5%96%AE%E6%A9%9F/airflow_mysql.png">
 <meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/07/Airflow-with-docker-compose-airflow-mysql-rabbitmq-%E5%96%AE%E6%A9%9F/docker-compose%E5%95%9F%E5%8B%95_singal.png">
 <meta property="article:published_time" content="2022-06-07T09:38:55.000Z">
-<meta property="article:modified_time" content="2022-06-08T14:15:33.983Z">
+<meta property="article:modified_time" content="2022-06-09T06:26:51.369Z">
 <meta property="article:author" content="Dawn">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="airflow">
@@ -145,13 +145,17 @@
         <span class="column is-narrow">
             
             
-            5 分鐘 讀完 (約 787 字)
+            6 分鐘 讀完 (約 855 字)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h2 id="主機環境"><a href="#主機環境" class="headerlink" title="主機環境"></a>主機環境</h2><ul>
+        <html><head></head><body><h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><ul>
+<li>本篇針對docker-compose建構airflow+mysql+rabbitmq的環境</li>
+<li>airflow基礎介紹可參考: <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2MTQzNjQ5Ng==&amp;mid=2247493044&amp;idx=1&amp;sn=f80065cc064a08f7a2b9cedbd5c1a9d8&amp;chksm=ea58c08bdd2f499dd3fa9936155b170194b969551f938d2a974d878ea620958e2bf5fe44390f&amp;cur_album_id=1369187505597235200">https://mp.weixin.qq.com/s?__biz=MzI2MTQzNjQ5Ng==&amp;mid=2247493044&amp;idx=1&amp;sn=f80065cc064a08f7a2b9cedbd5c1a9d8&amp;chksm=ea58c08bdd2f499dd3fa9936155b170194b969551f938d2a974d878ea620958e2bf5fe44390f&amp;cur_album_id=1369187505597235200</a></li>
+</ul>
+<h2 id="主機環境"><a href="#主機環境" class="headerlink" title="主機環境"></a>主機環境</h2><ul>
 <li>操作系统: Ubuntu 16.04.7 LTS</li>
 <li>内核版本: Linux 4.15.0-142-generic</li>
 <li>docker-compose版本: v1.29.1</li>
