@@ -16,16 +16,16 @@
 
 
 
-    <meta name="description" content="什麼是網路爬蟲爬蟲是一個程式  這個程式可以做什麼？  可以模擬人類瀏覽網頁的行為，從中獲取所需的數據 比較口語化的說法是可以代替你自動從網站中取得資料，幾個優點如下，包括  不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料 從重複copy＆paste的過程中解放 獲得好幾個重要小幫手？  爬蟲可以解決什麼問題爬蟲有很多的應用，從文章所述優點舉例說明  不需要時時刻刻盯著各大網站的重要訊息">
+    <meta name="description" content="什麼是網路爬蟲爬蟲是一個程式  這個程式可以做什麼？  可以模擬人類瀏覽網頁的行為，從中獲取網頁上所需的數據 比較口語化的說法是可以代替你自動從網站中取得資料，幾個優點如下，包括  不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料 從重複copy＆paste的過程中解放 獲得好幾個重要小幫手？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="爬蟲基礎介紹-part1">
 <meta property="og:url" content="https://dawn0472.github.io/articles/2022/06/12/%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9-part1/index.html">
 <meta property="og:site_name" content="Dawn的技術部落格">
-<meta property="og:description" content="什麼是網路爬蟲爬蟲是一個程式  這個程式可以做什麼？  可以模擬人類瀏覽網頁的行為，從中獲取所需的數據 比較口語化的說法是可以代替你自動從網站中取得資料，幾個優點如下，包括  不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料 從重複copy＆paste的過程中解放 獲得好幾個重要小幫手？  爬蟲可以解決什麼問題爬蟲有很多的應用，從文章所述優點舉例說明  不需要時時刻刻盯著各大網站的重要訊息">
+<meta property="og:description" content="什麼是網路爬蟲爬蟲是一個程式  這個程式可以做什麼？  可以模擬人類瀏覽網頁的行為，從中獲取網頁上所需的數據 比較口語化的說法是可以代替你自動從網站中取得資料，幾個優點如下，包括  不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料 從重複copy＆paste的過程中解放 獲得好幾個重要小幫手？">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/12/%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9-part1/爬蟲名稱由來.gif">
 <meta property="article:published_time" content="2022-06-12T07:56:51.000Z">
-<meta property="article:modified_time" content="2022-06-12T15:44:08.578Z">
+<meta property="article:modified_time" content="2022-06-12T18:23:57.062Z">
 <meta property="article:author" content="Dawn">
 <meta property="article:tag" content="爬蟲">
 <meta property="article:tag" content="python">
@@ -144,7 +144,7 @@
         <span class="column is-narrow">
             
             
-            7 分鐘 讀完 (約 1047 字)
+            11 分鐘 讀完 (約 1597 字)
         </span>
         
     </div>
@@ -154,13 +154,15 @@
 <blockquote>
 <p>這個程式可以做什麼？</p>
 </blockquote>
-<p>可以模擬人類瀏覽網頁的行為，從中獲取所需的數據</p>
+<p>可以模擬人類瀏覽網頁的行為，從中獲取網頁上所需的數據</p>
 <p>比較口語化的說法是可以代替你<strong>自動從網站中取得資料</strong>，幾個優點如下，包括<br></p>
 <ul>
 <li>不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料<br></li>
 <li>從重複copy＆paste的過程中解放<br></li>
 <li>獲得好幾個重要小幫手？<br></li>
 </ul>
+<span id="more"></span>
+
 <h2 id="爬蟲可以解決什麼問題"><a href="#爬蟲可以解決什麼問題" class="headerlink" title="爬蟲可以解決什麼問題"></a>爬蟲可以解決什麼問題</h2><p>爬蟲有很多的應用，從文章所述優點舉例說明<br></p>
 <blockquote>
 <p>不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料</p>
@@ -169,11 +171,11 @@
 <blockquote>
 <p>從重複copy＆paste的過程中解放</p>
 </blockquote>
-<p>上班族應該都有經驗是有些報告或分析需要定期產出，部分資料需要擷取網站數據，再一筆筆複製貼到excel中最後產製結果。如果只有十幾筆很快即能完成，如果複製的數據來自各網頁只要有幾百筆的話，就會成為複製貼上的機器人，次數一多還可能貼錯，而爬蟲就能幫你從這樣呆板的行為中解放，讓你可以多出更多時間優化報告內容。</p>
+<p>上班族應該都有經驗是有些報告或分析需要定期產出，部分資料需要重複擷取網站數據，再一筆筆複製貼到excel中最後產製結果。如果只有十幾筆很快即能完成，但假使複製的數據來自各網頁且有幾百筆以上的話，就會淪為複製貼上的機器人，手動執行還可能貼錯，而爬蟲就能幫你從這樣呆板的行為中解放，讓你可以多出更多時間優化報告內容。</p>
 <blockquote>
 <p>獲得好幾個重要小幫手</p>
 </blockquote>
-<p>愛看演唱會的粉絲應該深有體驗，票開搶之際常常可能5分鐘之內售罄，此時簡直恨不得可以多10幾隻手從好幾台電腦下手開搶。而擁有爬蟲，就能在搶票時多好幾個小幫手協助自己自動搶票，成為搶票達人就不再是夢想，當然前提是機器效能夠高。</p>
+<p>愛看演唱會的粉絲應該深有體驗，演唱會門票開搶之際常常可能5分鐘之內售罄，此時簡直恨不得可以多10幾隻手從好幾台手機或電腦下手開搶。而擁有爬蟲，就能在搶票時多好幾個小幫手協助自己自動搶票，成為搶票達人不再是夢想，當然前提是機器效能夠高。</p>
 <h2 id="爬蟲小知識-爬蟲名稱由來"><a href="#爬蟲小知識-爬蟲名稱由來" class="headerlink" title="爬蟲小知識 - 爬蟲名稱由來"></a>爬蟲小知識 - 爬蟲名稱由來</h2><p>網路爬蟲(web crawler)，也被稱蜘蛛，「web spider」</p>
 <ul>
 <li><p>爬蟲，指的是在程式在網路中爬行，一步一步找到所需的數據</p>
@@ -181,26 +183,56 @@
 <li><p>蜘蛛，指的是網際網路就像一張大網，程式就像蜘蛛一樣，會在這張網上到處爬行，最後將資料擷取下來</p>
 </li>
 </ul>
-<h2 id="從網頁取得數據的流程"><a href="#從網頁取得數據的流程" class="headerlink" title="從網頁取得數據的流程"></a>從網頁取得數據的流程</h2><p>無論是人為或是程式，當我們從網頁獲取資料時，大致的步驟如下：<br>假設我們想知道博客來2021年度百大暢銷榜有哪些書，<a target="_blank" rel="noopener" href="https://www.books.com.tw/web/annual100">博客來2021年度百大暢銷榜</a></p>
+<h2 id="從網頁取得數據的流程"><a href="#從網頁取得數據的流程" class="headerlink" title="從網頁取得數據的流程"></a>從網頁取得數據的流程</h2><p>無論是人為或是程式，當我們從網頁獲取資料時，大致的步驟如下：<br>假設我們想知道博客來2021年度百大暢銷榜有哪些書? <a target="_blank" rel="noopener" href="https://www.books.com.tw/web/annual100">博客來2021年度百大暢銷榜</a></p>
 <ol>
-<li><p>進入博客來網頁：每個我們使用的服務都有一個入口，在這裡我們先稱為網頁入口，即網頁連結，從瀏覽器中點擊百大暢銷榜的連結</p>
+<li><p>進入博客來網頁：每個我們使用的服務都有一個入口，在這裡先稱為網頁入口，即網頁連結，從瀏覽器中點擊百大暢銷榜的連結</p>
 </li>
-<li><p>資料的站點：資料的位置不一定放在入口網站的伺服器上，假設博客來除了入口伺服器外，後台有五台機器，排行榜的資料放在第三台機器上		</p>
+<li><p>資料的站點：資料的位置不一定放在入口網頁的伺服器上，假設博客來除了入口伺服器外，後台有五台機器，排行榜的資料放在第三台機器上</p>
 </li>
-<li><p>要資料：當我們點擊連結的那一刻，瀏覽器就向博客來的伺服器索取資料		</p>
+<li><p>要資料：當我們點擊連結的那一刻，瀏覽器就向博客來的伺服器索取資料</p>
 </li>
-<li><p>給資料：當取得資料後，伺服器開始回傳	</p>
+<li><p>給資料：當取得資料後，伺服器開始回傳</p>
 </li>
-<li><p>結果：瀏覽器取得回傳後的資料，並呈現於設備上讓我們瀏覽		</p>
+<li><p>結果：瀏覽器取得回傳後的資料，並呈現於設備上讓我們瀏覽</p>
 </li>
-<li><p>補充：至此從網頁獲取資料的過程就結束了，但在博客來後台每台機器都是可以相通的，也就是說今天資料不管放在第幾台機器上，只要有開放我們都能取得</p>
+<li><p>補充：</p>
+<ul>
+<li>至此從網頁獲取資料的過程就結束了，但在博客來後台每台機器都是可以相通的，也就是說今天資料不管放在第幾台機器上，只要有開放我們都能取得</li>
+<li>後台的五台機器們，就是俗稱的內網(區域網路)，可以看流程圖上五台機器間之間的連結就像一張網，而外網(公用網路)，就是各種開放給外部使用服務的組成，內網加上外網，則形成我們所熟知的網路</li>
+</ul>
 </li>
 </ol>
-<p>		</p>
 <center><img src="爬蟲名稱由來.gif" width="200%" height="200%"></center>
 
-
-<h2 id="如何入門"><a href="#如何入門" class="headerlink" title="如何入門"></a>如何入門</h2><h2 id="爬蟲禮儀"><a href="#爬蟲禮儀" class="headerlink" title="爬蟲禮儀"></a>爬蟲禮儀</h2></body></html>
+<h2 id="如何入門"><a href="#如何入門" class="headerlink" title="如何入門"></a>如何入門</h2><p>如果你沒有程式的基礎，可以從文章瞭解爬蟲的概念後，透過Octoparse入門實作</p>
+<blockquote>
+<p>Octoparse 為自動化爬蟲生成工具，詳細可參考<a target="_blank" rel="noopener" href="https://www.octoparse.com/">Octoparse 官網</a></p>
+</blockquote>
+<p>優點：</p>
+<ul>
+<li>圖形化介面</li>
+<li>無需有程式背景基礎</li>
+<li>可利用拖曳方式自動將資料擷取下來</li>
+</ul>
+<p>缺點：</p>
+<ul>
+<li>14天免費試用期</li>
+<li>執行速度相較一般爬蟲程式慢</li>
+<li>可能無法實現擷取網頁細節內容</li>
+</ul>
+<p>如果你有程式基礎，或希望學習程式建立屬於自己的爬蟲工具，可依照使用場景與需求，自行選擇適合的程式語言。<br><br>一般初學者建議從python入手，原因如下：</p>
+<ul>
+<li>相較其他程式語言C#或java，簡單易學，較可以快速上手</li>
+<li>python的生態圈很廣，因此當學習有問題時，不怕找不到學習資源，且已有很多大神寫好很多套件供使用</li>
+<li>python的分布式框架較完善，當有大量的爬蟲需求時建議使用</li>
+<li>python為目前主流成熟度高處理數據的程式語言，有相當多處理與分析數據的套件支援，若有後續處理數據的需求會相當推薦</li>
+</ul>
+<h2 id="爬蟲禮儀"><a href="#爬蟲禮儀" class="headerlink" title="爬蟲禮儀"></a>爬蟲禮儀</h2><p>雖然網路資源很多是對外開放，但為了避免爬蟲程式在短時間內快速爬取而造成對方伺服器負擔，在爬蟲的過程中，有些需要注意的細節</p>
+<ul>
+<li>避免爬取頻率過高或過量</li>
+<li>遵守robots.txt協議的規範，瞭解哪一類的資源可供爬取，規範可參考維基百科 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Robots.txt">robots.txt</a></li>
+</ul>
+</body></html>
     
     </div>
     
@@ -248,7 +280,7 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2022 Dawn&nbsp;
-                Разработано на базе <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
                         target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
