@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>[爬蟲基礎介紹]part2: HTTP架構 - Dawn的技術部落格</title>
+<title>【爬蟲基礎介紹】part1: 什麼是爬蟲? - Dawn的技術部落格</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,22 +16,21 @@
 
 
 
-    <meta name="description" content="從上篇文章中我們可以瞭解  爬蟲的本質是要模擬人類瀏覽網頁的行為 實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息  若對上一篇文章有興趣，可參考Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？  本篇文章會更深入說明，瀏覽器與伺服器在互動時的角色與行為規範">
+    <meta name="description" content="什麼是網路爬蟲爬蟲是一個程式  這個程式可以做什麼？  可以模擬人類瀏覽網頁的行為，從中獲取網頁上所需的數據 比較口語化的說法是可以代替你自動從網站中取得資料，幾個優點如下，包括  不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料 從重複copy＆paste的過程中解放 獲得好幾個重要小幫手？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[爬蟲基礎介紹]part2: HTTP架構">
-<meta property="og:url" content="https://dawn0472.github.io/articles/2022/06/23/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part2%EF%BC%9AHTTP%E6%9E%B6%E6%A7%8B/index.html">
+<meta property="og:title" content="【爬蟲基礎介紹】part1: 什麼是爬蟲?">
+<meta property="og:url" content="https://dawn0472.github.io/articles/2022/06/12/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part1/index.html">
 <meta property="og:site_name" content="Dawn的技術部落格">
-<meta property="og:description" content="從上篇文章中我們可以瞭解  爬蟲的本質是要模擬人類瀏覽網頁的行為 實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息  若對上一篇文章有興趣，可參考Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？  本篇文章會更深入說明，瀏覽器與伺服器在互動時的角色與行為規範">
+<meta property="og:description" content="什麼是網路爬蟲爬蟲是一個程式  這個程式可以做什麼？  可以模擬人類瀏覽網頁的行為，從中獲取網頁上所需的數據 比較口語化的說法是可以代替你自動從網站中取得資料，幾個優點如下，包括  不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料 從重複copy＆paste的過程中解放 獲得好幾個重要小幫手？">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/23/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part2%EF%BC%9AHTTP%E6%9E%B6%E6%A7%8B/瀏覽器與伺服器互動.gif">
-<meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/23/%5B%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9%5Dpart2%EF%BC%9AHTTP%E6%9E%B6%E6%A7%8B/error404.jpg">
-<meta property="article:published_time" content="2022-06-23T14:33:37.000Z">
-<meta property="article:modified_time" content="2022-06-24T11:32:10.922Z">
+<meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/12/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part1/爬蟲名稱由來.gif">
+<meta property="article:published_time" content="2022-06-12T07:56:51.000Z">
+<meta property="article:modified_time" content="2022-06-24T11:44:39.428Z">
 <meta property="article:author" content="Dawn">
 <meta property="article:tag" content="爬蟲">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dawn0472.github.io/articles/2022/06/23/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part2%EF%BC%9AHTTP%E6%9E%B6%E6%A7%8B/瀏覽器與伺服器互動.gif">
+<meta name="twitter:image" content="https://dawn0472.github.io/articles/2022/06/12/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part1/爬蟲名稱由來.gif">
 
 
 
@@ -138,13 +137,13 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            [爬蟲基礎介紹]part2: HTTP架構
+            【爬蟲基礎介紹】part1: 什麼是爬蟲?
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>6月 23 2022</span>
+                <span>6月 12 2022</span>
             
         </span>
         
@@ -157,89 +156,93 @@
         <span class="column is-narrow">
             
             
-            8 分鐘 讀完 (約 1227 字)
+            11 分鐘 讀完 (約 1597 字)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p>從上篇文章中我們可以瞭解</p>
-<ul>
-<li>爬蟲的本質是要模擬人類瀏覽網頁的行為</li>
-<li>實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息</li>
-</ul>
-<p>若對上一篇文章有興趣，可參考<a href="#">Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？</a></p>
+        <html><head></head><body><h2 id="什麼是網路爬蟲"><a href="#什麼是網路爬蟲" class="headerlink" title="什麼是網路爬蟲"></a>什麼是網路爬蟲</h2><p>爬蟲是一個程式</p>
 <blockquote>
-<p>本篇文章會更深入說明，瀏覽器與伺服器在互動時的角色與行為規範</p>
+<p>這個程式可以做什麼？</p>
 </blockquote>
+<p>可以模擬人類瀏覽網頁的行為，從中獲取網頁上所需的數據</p>
+<p>比較口語化的說法是可以代替你<strong>自動從網站中取得資料</strong>，幾個優點如下，包括<br></p>
+<ul>
+<li>不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料<br></li>
+<li>從重複copy＆paste的過程中解放<br></li>
+<li>獲得好幾個重要小幫手？<br></li>
+</ul>
 <span id="more"></span>
 
-<h2 id="request與response"><a href="#request與response" class="headerlink" title="request與response"></a>request與response</h2><p>如同part1文章所述，我們想知道博客來2021年度百大暢銷榜有哪些書? <a target="_blank" rel="noopener" href="https://www.books.com.tw/web/annual100">博客來2021年度百大暢銷榜</a></p>
-<p>當我們點擊博客來的網頁時，有四個專有名詞我們需要瞭解</p>
+<h2 id="爬蟲可以解決什麼問題"><a href="#爬蟲可以解決什麼問題" class="headerlink" title="爬蟲可以解決什麼問題"></a>爬蟲可以解決什麼問題</h2><p>爬蟲有很多的應用，從文章所述優點舉例說明<br></p>
+<blockquote>
+<p>不需要時時刻刻盯著各大網站的重要訊息，才能獲取第一手資料</p>
+</blockquote>
+<p>很多租屋族都希望可以抽到社會住宅，但是社會住宅的公告其實是不定期的，常常得知社會住宅釋出時，已經是公告抽籤結果了。此時爬蟲就可以自動幫你監看政府住宅單位的公告，只要政府一公佈消息就即時通知你，讓你能夠短時間內就上網填寫申請表單，不用再時不時上網查詢。</p>
+<blockquote>
+<p>從重複copy＆paste的過程中解放</p>
+</blockquote>
+<p>上班族應該都有經驗是有些報告或分析需要定期產出，部分資料需要重複擷取網站數據，再一筆筆複製貼到excel中最後產製結果。如果只有十幾筆很快即能完成，但假使複製的數據來自各網頁且有幾百筆以上的話，就會淪為複製貼上的機器人，手動執行還可能貼錯，而爬蟲就能幫你從這樣呆板的行為中解放，讓你可以多出更多時間優化報告內容。</p>
+<blockquote>
+<p>獲得好幾個重要小幫手</p>
+</blockquote>
+<p>愛看演唱會的粉絲應該深有體驗，演唱會門票開搶之際常常可能5分鐘之內售罄，此時簡直恨不得可以多10幾隻手從好幾台手機或電腦下手開搶。而擁有爬蟲，就能在搶票時多好幾個小幫手協助自己自動搶票，成為搶票達人不再是夢想，當然前提是機器效能夠高。</p>
+<h2 id="爬蟲小知識-爬蟲名稱由來"><a href="#爬蟲小知識-爬蟲名稱由來" class="headerlink" title="爬蟲小知識 - 爬蟲名稱由來"></a>爬蟲小知識 - 爬蟲名稱由來</h2><p>網路爬蟲(web crawler)，也被稱蜘蛛，「web spider」</p>
 <ul>
-<li>客戶端(Client)：連網設備、瀏覽器，會發送 <strong>請求 (request)</strong> 到Server</li>
-<li>伺服器端(Server)：收到Client發送的request，開始處理請求，並 <strong>回應 (response)</strong> 到Client</li>
-<li>請求資料(request)：Client向Server <strong>索取資料</strong> 的行為</li>
-<li>回應資料(response)：Server <strong>回傳資料</strong> 到Client的行為</li>
+<li><p>爬蟲，指的是在程式在網路中爬行，一步一步找到所需的數據</p>
+</li>
+<li><p>蜘蛛，指的是網際網路就像一張大網，程式就像蜘蛛一樣，會在這張網上到處爬行，最後將資料擷取下來</p>
+</li>
 </ul>
-<p>我們可以先想像在Client與Server間有個郵差協助彼此互相傳遞消息<br>最後資料呈現於網頁上，如下圖：</p>
-<center><img src="瀏覽器與伺服器互動.gif" width="100%" height="100%"></center>
-
-<h2 id="HTTP協議"><a href="#HTTP協議" class="headerlink" title="HTTP協議"></a>HTTP協議</h2><p>那傳送的過程有沒有要遵守的規範呢？ 有的，網路通訊必須遵守<strong>HTTP協議</strong>，也就是超文本傳輸協定</p>
-<p>就像是寫信時，必須要有特定的信封，收件人必須要寫在中間，信封左右或上下寫上寄件人與收件人的地址，郵差才能迅速無誤幫我們寄出信件一樣，網路傳輸時需要遵守特定的規範，才能讓Client與Server之間能看懂訊號，並回傳正確的數據。</p>
-<p>不知道大家是否曾經在瀏覽網頁時收到以下畫面<br>無論是無法找到IP位置，或者是網頁回應時間過長無法連線等等訊息，都是告訴你現在網頁無法連線</p>
-<p><img src="/articles/2022/06/23/%5B%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9%5Dpart2%EF%BC%9AHTTP%E6%9E%B6%E6%A7%8B/error404.jpg"></p>
+<h2 id="從網頁取得數據的流程"><a href="#從網頁取得數據的流程" class="headerlink" title="從網頁取得數據的流程"></a>從網頁取得數據的流程</h2><p>無論是人為或是程式，當我們從網頁獲取資料時，大致的步驟如下：<br>假設我們想知道博客來2021年度百大暢銷榜有哪些書? <a target="_blank" rel="noopener" href="https://www.books.com.tw/web/annual100">博客來2021年度百大暢銷榜</a></p>
 <ol>
-<li>如何透過HTTP得知現在網頁是否連線成功? 若無法連線是什麼原因造成？可以透過</li>
-</ol>
-<blockquote>
-<p><strong>HTTP狀態碼</strong>(HTTP Status Code)</p>
-</blockquote>
-<p>HTTP 狀態碼以數字表示，通常以開頭的數字可以判斷連線狀況<br>一般成功連上網頁的Status Code為200，更多可參考<br>A. <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status">ＭＤＮ技術文件</a><br>B. <a target="_blank" rel="noopener" href="https://noob.tw/http-status-code/">常見與不常見的 HTTP Status Code(有趣的說明)</a></p>
+<li><p>進入博客來網頁：每個我們使用的服務都有一個入口，在這裡先稱為網頁入口，即網頁連結，從瀏覽器中點擊百大暢銷榜的連結</p>
+</li>
+<li><p>資料的站點：資料的位置不一定放在入口網頁的伺服器上，假設博客來除了入口伺服器外，後台有五台機器，排行榜的資料放在第三台機器上</p>
+</li>
+<li><p>要資料：當我們點擊連結的那一刻，瀏覽器就向博客來的伺服器索取資料</p>
+</li>
+<li><p>給資料：當取得資料後，伺服器開始回傳</p>
+</li>
+<li><p>結果：瀏覽器取得回傳後的資料，並呈現於設備上讓我們瀏覽</p>
+</li>
+<li><p>補充：</p>
 <ul>
-<li>1XX: 臨時訊息提示，通常代表請求被接受，可繼續請求</li>
-<li>2XX: 請求成功，常見代碼為200</li>
-<li>3XX: 網頁重新導向，常見代碼為302，用戶需要採取進一步的行動才能完成請求</li>
-<li>4XX: 客戶端錯誤，常見代碼為404，找不到伺服器位置(網址打錯之類)</li>
-<li>5XX: 伺服器遇到錯誤，無法完成請求，常見代碼為504，Gateway time out</li>
-</ul>
-<ol start="2">
-<li>如何讓瀏覽器與伺服器溝通良好呢？ 需透過一些額外資料的設定，這些設定稱為</li>
-</ol>
-<blockquote>
-<p><strong>HTTP 表頭</strong>(HTTP headers)</p>
-</blockquote>
-<p>一般在爬蟲程式，我們只討論Request headers，更多可參考<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/HTTP%E5%A4%B4%E5%AD%97%E6%AE%B5">維基百科</a></p>
-<p>常用到的headers</p>
-<ul>
-<li>Cookie: Server傳送予使用者瀏覽器的一個小片段資料，可追蹤記錄並分析使用者行為</li>
-<li>User-Agent: Server從用戶的軟體規格、瀏覽器類別、版本號…等識別請求的Client為手機、電腦或平板，從而選擇適當的內容回應</li>
-<li>Content-Type: Server回傳的內容格式</li>
-<li>Referer: 當前網頁的上一頁從哪裡來</li>
-</ul>
-<ol start="3">
-<li>如何向瀏覽器請求資料？</li>
-</ol>
-<p>HTTP定義幾種標準方法可以向網址(URL)執行特定操作的請求方法<br>一般常見的兩種為GET &amp; POST，關於兩者差別，更詳細可參考<a target="_blank" rel="noopener" href="https://blog.toright.com/posts/1203/%E6%B7%BA%E8%AB%87-http-method%EF%BC%9A%E8%A1%A8%E5%96%AE%E4%B8%AD%E7%9A%84-get-%E8%88%87-post-%E6%9C%89%E4%BB%80%E9%BA%BC%E5%B7%AE%E5%88%A5%EF%BC%9F.html">表單中的 GET 與 POST 有什麼差別？</a></p>
-<ul>
-<li>GET: 向Server取得資料，所有提交的數據都顯示在 <strong>URL(網址)</strong>  上<ul>
-<li>舉例：單純向Server取得文字、圖片等資訊</li>
+<li>至此從網頁獲取資料的過程就結束了，但在博客來後台每台機器都是可以相通的，也就是說今天資料不管放在第幾台機器上，只要有開放我們都能取得</li>
+<li>後台的五台機器們，就是俗稱的內網(區域網路)，可以看流程圖上五台機器間之間的連結就像一張網，而外網(公用網路)，就是各種開放給外部使用服務的組成，內網加上外網，則形成我們所熟知的網路</li>
 </ul>
 </li>
-<li>POST: 向Server新增/提交數據，數據被包在message-body內<ul>
-<li>舉例：網頁登入會員資訊</li>
-</ul>
-</li>
-</ul>
-<p>其他Request Method，可參考<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods">MDN技術文件</a></p>
+</ol>
+<center><img src="爬蟲名稱由來.gif" width="200%" height="200%"></center>
+
+<h2 id="如何入門"><a href="#如何入門" class="headerlink" title="如何入門"></a>如何入門</h2><p>如果你沒有程式的基礎，可以從文章瞭解爬蟲的概念後，透過Octoparse入門實作</p>
+<blockquote>
+<p>Octoparse 為自動化爬蟲生成工具，詳細可參考<a target="_blank" rel="noopener" href="https://www.octoparse.com/">Octoparse 官網</a></p>
+</blockquote>
+<p>優點：</p>
 <ul>
-<li>Put : 取代request指定的數據</li>
-<li>Patch : 修改部分request指定的數據</li>
-<li>Delete : 刪除指定資源</li>
-<li>Head: 只獲取request的header，不要response body</li>
-<li>Option : 查看Server提供哪些Request Method</li>
-<li>CONNECT : 通常用於代理伺服器，也就是Proxy</li>
-<li>TRACE : 回傳Server收到的request，主要用于測試</li>
+<li>圖形化介面</li>
+<li>無需有程式背景基礎</li>
+<li>可利用拖曳方式自動將資料擷取下來</li>
+</ul>
+<p>缺點：</p>
+<ul>
+<li>14天免費試用期</li>
+<li>執行速度相較一般爬蟲程式慢</li>
+<li>可能無法實現擷取網頁細節內容</li>
+</ul>
+<p>如果你有程式基礎，或希望學習程式建立屬於自己的爬蟲工具，可依照使用場景與需求，自行選擇適合的程式語言。<br><br>一般初學者建議從python入手，原因如下：</p>
+<ul>
+<li>相較其他程式語言C#或java，簡單易學，較可以快速上手</li>
+<li>python的生態圈很廣，因此當學習有問題時，不怕找不到學習資源，且已有很多大神寫好很多套件供使用</li>
+<li>python的分布式框架較完善，當有大量的爬蟲需求時建議使用</li>
+<li>python為目前主流成熟度高處理數據的程式語言，有相當多處理與分析數據的套件支援，若有後續處理數據的需求會相當推薦</li>
+</ul>
+<h2 id="爬蟲禮儀"><a href="#爬蟲禮儀" class="headerlink" title="爬蟲禮儀"></a>爬蟲禮儀</h2><p>雖然網路資源很多是對外開放，但為了避免爬蟲程式在短時間內快速爬取而造成對方伺服器負擔，在爬蟲的過程中，有些需要注意的細節</p>
+<ul>
+<li>避免爬取頻率過高或過量</li>
+<li>遵守robots.txt協議的規範，瞭解哪一類的資源可供爬取，規範可參考維基百科 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Robots.txt">robots.txt</a></li>
 </ul>
 </body></html>
     
@@ -255,12 +258,14 @@
     
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/articles/2022/06/23/%5B%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9%5Dpart2/">【爬蟲基礎介紹】part2: HTTP架構</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/articles/2022/06/12/%5B%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9%5Dpart1%EF%BC%9A%E4%BB%80%E9%BA%BC%E6%98%AF%E7%88%AC%E8%9F%B2?/">[爬蟲基礎介紹]part1: 什麼是爬蟲?</a>
+            <a href="/articles/2022/06/08/Airflow-with-docker-compose-airflow-mysql-rabbitmq-%E5%88%86%E6%95%A3%E5%BC%8F%E7%92%B0%E5%A2%83/">Airflow with docker compose (airflow+mysql+rabbitmq) 分散式環境</a>
             
         </span>
     </div>
@@ -289,7 +294,7 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2022 Dawn&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                Разработано на базе <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
                         target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
