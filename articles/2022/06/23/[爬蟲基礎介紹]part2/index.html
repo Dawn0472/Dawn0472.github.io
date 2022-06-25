@@ -16,17 +16,17 @@
 
 
 
-    <meta name="description" content="從上篇文章中我們可以瞭解  爬蟲的本質是要模擬人類瀏覽網頁的行為 實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息  若對上一篇文章有興趣，可參考Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？  本篇文章會更深入說明，瀏覽器與伺服器在互動時的角色與行為規範">
+    <meta name="description" content="從上篇文章中我們可以瞭解  爬蟲的本質是要模擬人類瀏覽網頁的行為 實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息  若對上一篇文章有興趣，可參考Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？ 爬蟲的本質是模擬人類瀏覽網頁的行為，人類操作瀏覽器瀏覽網頁，也就是最終程式需要模擬瀏覽器與伺服器互動，不被發現偽裝，才能成功完成擷取數據的過程。因此我們需要瞭解瀏覽器與伺服器如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【爬蟲基礎介紹】part2: HTTP架構">
 <meta property="og:url" content="https://dawn0472.github.io/articles/2022/06/23/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part2/index.html">
 <meta property="og:site_name" content="Dawn的技術部落格">
-<meta property="og:description" content="從上篇文章中我們可以瞭解  爬蟲的本質是要模擬人類瀏覽網頁的行為 實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息  若對上一篇文章有興趣，可參考Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？  本篇文章會更深入說明，瀏覽器與伺服器在互動時的角色與行為規範">
+<meta property="og:description" content="從上篇文章中我們可以瞭解  爬蟲的本質是要模擬人類瀏覽網頁的行為 實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息  若對上一篇文章有興趣，可參考Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？ 爬蟲的本質是模擬人類瀏覽網頁的行為，人類操作瀏覽器瀏覽網頁，也就是最終程式需要模擬瀏覽器與伺服器互動，不被發現偽裝，才能成功完成擷取數據的過程。因此我們需要瞭解瀏覽器與伺服器如">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/23/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part2/瀏覽器與伺服器互動.gif">
 <meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/23/%5B%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9%5Dpart2/error404.jpg">
 <meta property="article:published_time" content="2022-06-23T14:33:37.000Z">
-<meta property="article:modified_time" content="2022-06-24T11:44:57.084Z">
+<meta property="article:modified_time" content="2022-06-25T09:02:03.085Z">
 <meta property="article:author" content="Dawn">
 <meta property="article:tag" content="爬蟲">
 <meta property="article:tag" content="python">
@@ -157,7 +157,7 @@
         <span class="column is-narrow">
             
             
-            8 分鐘 讀完 (約 1227 字)
+            9 分鐘 讀完 (約 1316 字)
         </span>
         
     </div>
@@ -169,13 +169,14 @@
 <li>實際我們在瀏覽網頁時，瀏覽器與伺服器之間如何傳遞訊息</li>
 </ul>
 <p>若對上一篇文章有興趣，可參考<a href="#">Post not found: 【爬蟲基礎介紹】part1：什麼是爬蟲？</a></p>
+<p>爬蟲的本質是模擬人類瀏覽網頁的行為，人類操作瀏覽器瀏覽網頁，也就是最終程式需要模擬瀏覽器與伺服器互動，不被發現偽裝，才能成功完成擷取數據的過程。因此我們需要瞭解瀏覽器與伺服器如何互動</p>
 <blockquote>
 <p>本篇文章會更深入說明，瀏覽器與伺服器在互動時的角色與行為規範</p>
 </blockquote>
 <span id="more"></span>
 
 <h2 id="request與response"><a href="#request與response" class="headerlink" title="request與response"></a>request與response</h2><p>如同part1文章所述，我們想知道博客來2021年度百大暢銷榜有哪些書? <a target="_blank" rel="noopener" href="https://www.books.com.tw/web/annual100">博客來2021年度百大暢銷榜</a></p>
-<p>當我們點擊博客來的網頁時，有四個專有名詞我們需要瞭解</p>
+<p>當我們點擊博客來的網頁時，有四個專有名詞需要瞭解</p>
 <ul>
 <li>客戶端(Client)：連網設備、瀏覽器，會發送 <strong>請求 (request)</strong> 到Server</li>
 <li>伺服器端(Server)：收到Client發送的request，開始處理請求，並 <strong>回應 (response)</strong> 到Client</li>
