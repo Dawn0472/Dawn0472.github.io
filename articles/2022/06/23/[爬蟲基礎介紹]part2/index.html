@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/23/[%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9]part2/瀏覽器與伺服器互動.gif">
 <meta property="og:image" content="https://dawn0472.github.io/articles/2022/06/23/%5B%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9%5Dpart2/error404.jpg">
 <meta property="article:published_time" content="2022-06-23T14:33:37.000Z">
-<meta property="article:modified_time" content="2022-06-27T11:42:44.408Z">
+<meta property="article:modified_time" content="2022-06-27T11:45:16.758Z">
 <meta property="article:author" content="Dawn">
 <meta property="article:tag" content="爬蟲">
 <meta property="article:tag" content="python">
@@ -202,11 +202,11 @@
 </blockquote>
 <p>HTTP 狀態碼以數字表示，通常以開頭的數字可以判斷連線狀況<br>一般成功連上網頁的Status Code為200，更多可參考<br>A. <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status">MDN技術文件</a><br>B. <a target="_blank" rel="noopener" href="https://noob.tw/http-status-code/">常見與不常見的 HTTP Status Code(有趣的說明)</a></p>
 <ul>
-<li>1XX: 臨時訊息提示，通常代表請求被接受，可繼續請求</li>
-<li>2XX: 請求成功，常見代碼為200</li>
-<li>3XX: 網頁重新導向，常見代碼為302，用戶需要採取進一步的行動才能完成請求</li>
-<li>4XX: 客戶端錯誤，常見代碼為404，找不到伺服器位置(網址打錯之類)</li>
-<li>5XX: 伺服器遇到錯誤，無法完成請求，常見代碼為504，Gateway Time-out</li>
+<li>1XX : 臨時訊息提示，通常代表請求被接受，可繼續請求</li>
+<li>2XX : 請求成功，常見代碼為200</li>
+<li>3XX : 網頁重新導向，常見代碼為302，用戶需要採取進一步的行動才能完成請求</li>
+<li>4XX : 客戶端錯誤，常見代碼為404，找不到伺服器位置(網址打錯之類)</li>
+<li>5XX : 伺服器遇到錯誤，無法完成請求，常見代碼為504，Gateway Time-out</li>
 </ul>
 <ol start="2">
 <li>如何讓瀏覽器與伺服器溝通良好呢？ 需透過一些額外資料的設定，這些設定稱為</li>
@@ -217,11 +217,11 @@
 <p>一般在爬蟲程式，我們只討論Request headers，更多可參考<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/HTTP%E5%A4%B4%E5%AD%97%E6%AE%B5">維基百科</a></p>
 <p><strong>常用到的headers</strong></p>
 <ul>
-<li>Cookie: Server傳送予使用者瀏覽器的一個小片段資料，可追蹤記錄並分析使用者行為</li>
-<li>User-Agent: Server從用戶的軟體規格、瀏覽器類別、版本號…等識別請求的Client為手機、電腦或平板，從而選擇適當的內容回應</li>
-<li>Content-Type: Server回傳的內容格式</li>
-<li>Referer: 當前網頁的上一頁從哪裡來</li>
-<li>Host: Server主機位置</li>
+<li>Cookie : Server傳送予使用者瀏覽器的一個小片段資料，可追蹤記錄並分析使用者行為</li>
+<li>User-Agent : Server從用戶的軟體規格、瀏覽器類別、版本號…等識別請求的Client為手機、電腦或平板，從而選擇適當的內容回應</li>
+<li>Content-Type : Server回傳的內容格式</li>
+<li>Referer : 當前網頁的上一頁從哪裡來</li>
+<li>Host : Server主機位置</li>
 </ul>
 <ol start="3">
 <li>如何向瀏覽器請求資料？</li>
