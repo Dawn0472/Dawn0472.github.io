@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>從Anaconda到pyenv：在ubuntu上使用pyenv建立Python開發環境 - Dawn的技術部落格</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="緣由初始學習Python便是以資料工程的領域入門，Anaconda提供不少資料科學與分析所需的套件，且預設安裝Jupyter notebook，基於傻瓜部署，一路使用至今。因如下介紹的conda的部署缺點，一直有考慮其他Python開發環境部署方式。 眾所皆知，Apple在2021推出自製ARM M1晶片，本篇操作載入ARM架構下的image，Ubuntu 20.04.5 LTS。 以pyenv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="從Anaconda到pyenv：在ubuntu上使用pyenv建立Python開發環境">
+<meta property="og:url" content="https://dawn0472.github.io/articles/2022/09/28/%E5%BE%9EAnaconda%E5%88%B0pyenv%EF%BC%9A%E5%9C%A8ubuntu%E4%B8%8A%E4%BD%BF%E7%94%A8pyenv%E5%BB%BA%E7%AB%8BPython%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/index.html">
+<meta property="og:site_name" content="Dawn的技術部落格">
+<meta property="og:description" content="緣由初始學習Python便是以資料工程的領域入門，Anaconda提供不少資料科學與分析所需的套件，且預設安裝Jupyter notebook，基於傻瓜部署，一路使用至今。因如下介紹的conda的部署缺點，一直有考慮其他Python開發環境部署方式。 眾所皆知，Apple在2021推出自製ARM M1晶片，本篇操作載入ARM架構下的image，Ubuntu 20.04.5 LTS。 以pyenv">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-09-28T10:07:07.000Z">
+<meta property="article:modified_time" content="2022-09-28T10:10:57.070Z">
+<meta property="article:author" content="Dawn">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pyenv">
+<meta property="article:tag" content="Anaconda">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<script type="text/javascript" async src="https://www.google-analytics.com/analytics.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-72W8N38ZBJ">
+</script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-72W8N38ZBJ');
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">文章列表</a>
+            
+            <a class="navbar-item "
+               href="/categories">分類</a>
+            
+            <a class="navbar-item "
+               href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/Dawn0472">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            從Anaconda到pyenv：在ubuntu上使用pyenv建立Python開發環境
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <span>9月 28 2022</span>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 分鐘 讀完 (約 1133 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h2 id="緣由"><a href="#緣由" class="headerlink" title="緣由"></a>緣由</h2><p>初始學習Python便是以資料工程的領域入門，Anaconda提供不少資料科學與分析所需的套件，且預設安裝Jupyter notebook，基於傻瓜部署，一路使用至今。因如下介紹的conda的部署缺點，一直有考慮其他Python開發環境部署方式。</p>
+<p>眾所皆知，Apple在2021推出自製ARM M1晶片，本篇操作載入ARM架構下的image，<a target="_blank" rel="noopener" href="https://cdimage.ubuntu.com/focal/daily-live/current/">Ubuntu 20.04.5 LTS</a>。</p>
+<p>以pyenv + virtualenv紀錄部署上的重點。</p>
+<span id="more"></span>
+
+<h2 id="Python開發環境部署"><a href="#Python開發環境部署" class="headerlink" title="Python開發環境部署"></a>Python開發環境部署</h2><ol>
+<li>Anaconda</li>
+</ol>
+<ul>
+<li>優點：傻瓜部署，只需按照官方說明安裝，安裝完後依照專案設定python版本與env，即可快速使用</li>
+<li>缺點：<ul>
+<li>因預設載好各種資料科學套件包，從下載到安裝完成需30分鐘以上</li>
+<li>可使用conda與pip安裝套件，當環境需要轉移，整理requirement.txt耗時</li>
+<li>當有封裝程式需求時，因有非常多套件一起封裝，最終封裝完的程式檔案可能佔用太多空間</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Miniconda<br>因肥大的資料科學套件引人詬病，miniconda是anaconda的精簡版，只有環境控制的相關功能，沒有多餘的library</li>
+</ol>
+<ul>
+<li>優點：免預先安裝多餘library，可繼續使用conda管理python env</li>
+<li>缺點：與Anaconda相同，當環境需要轉移，整理requirement.txt耗時</li>
+</ul>
+<ol start="3">
+<li>pyenv</li>
+</ol>
+<ul>
+<li><p>優點：</p>
+<ul>
+<li>與Miniconda類似，極輕量</li>
+<li>僅用pip進行管理</li>
+</ul>
+</li>
+<li><p>缺點：僅有python版本管理，env管理需搭配pyenv-virtualenv</p>
+</li>
+</ul>
+<h2 id="主機環境"><a href="#主機環境" class="headerlink" title="主機環境"></a>主機環境</h2><ul>
+<li>操作系统: Ubuntu 20.04.5 LTS (Focal Fossa)</li>
+<li>内核版本: 5.15.0-48-generic</li>
+</ul>
+<h2 id="安裝pyenv"><a href="#安裝pyenv" class="headerlink" title="安裝pyenv"></a>安裝pyenv</h2><p>安裝參考<a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv">pyenv 官方 GitHub</a></p>
+<ol>
+<li><p>從GitHub載入pyenv</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="hljs-built_in">clone</span> https://github.com/pyenv/pyenv.git ~/.pyenv</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在 ~/.bashrc 添加以下字段</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">'export PYENV_ROOT="$HOME/.pyenv"'</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">'command -v pyenv &gt;/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"'</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">'eval "$(pyenv init -)"'</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在 ~/.profile 添加以下字段</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">'export PYENV_ROOT="$HOME/.pyenv"'</span> &gt;&gt; ~/.profile</span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">'command -v pyenv &gt;/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"'</span> &gt;&gt; ~/.profile</span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">'eval "$(pyenv init -)"'</span> &gt;&gt; ~/.profile</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>重啟shell，使環境變數生效</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">exec</span> <span class="hljs-string">"<span class="hljs-variable">$SHELL</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>查閱pyenv下所有Python版本，檢查是否安裝成功</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv versions</span><br></pre></td></tr></tbody></table></figure>
+<p>輸出如下說明即代表安裝成功</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* system (<span class="hljs-built_in">set</span> by /home/username/.pyenv/version)</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="使用-pyenv-install-安裝-Python"><a href="#使用-pyenv-install-安裝-Python" class="headerlink" title="使用 pyenv install 安裝 Python"></a>使用 pyenv install 安裝 Python</h2><ol>
+<li><p>列出所有可安裝的Python版本</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install --list</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>安裝Python 3.6.5</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.6.5</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<ul>
+<li>執行後出現訊息<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Downloading Python-3.6.5.tar.xz...</span><br><span class="line">-&gt; https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz</span><br><span class="line">Installing Python-3.6.5...</span><br><span class="line">Installed Python-3.6.5 to /home/dawn/.pyenv/versions/3.6.5</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<ol start="3">
+<li>等待安裝完成後，重新查看pyenv版本輸出如下，可切換環境使用。<br>PS: 僅一種版本對應一個環境，並不夠便捷，因此安裝pyenv-virtualenv可以更方便協助管理環境。<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* system (<span class="hljs-built_in">set</span> by /home/dawn/.pyenv/version)</span><br><span class="line">  3.6.5</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="安裝pyenv-virtualenv"><a href="#安裝pyenv-virtualenv" class="headerlink" title="安裝pyenv-virtualenv"></a>安裝pyenv-virtualenv</h2><p>依據官網說明，pyenv-virtualenv為Pyenv的外掛套件，可以管理Python的虛擬環境</p>
+<ol>
+<li><p>從GitHub載入pyenv-virtualenv</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="hljs-built_in">clone</span> https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在 ~/.bashrc 添加以下字段</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">'eval "$(pyenv virtualenv-init -)"'</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>重啟shell，使環境變數生效</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">exec</span> <span class="hljs-string">"<span class="hljs-variable">$SHELL</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>創建虛擬環境，環境名稱myenv<br>PS:需要注意要先以pyenv建立3.6.5的python版本，才有辦法創建該版本的env，若無指定版本，則以系統預設版本為主</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenv 3.6.5 myenv</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="切換環境"><a href="#切換環境" class="headerlink" title="切換環境"></a>切換環境</h2><ol>
+<li>global<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pyenv global myenv <span class="hljs-comment"># 設定系統預設的python環境為myenv</span></span><br><span class="line">pyenv global 3.6.5 <span class="hljs-comment"># 設定系統預設python版本</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<ul>
+<li>查閱系統當下版本，以系統設定python版本為例，輸出如下<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  system</span><br><span class="line">* 3.6.5 (<span class="hljs-built_in">set</span> by /home/dawn/.pyenv/version) <span class="hljs-comment"># ＊為系統預設版本</span></span><br><span class="line">  3.6.5/envs/myenv</span><br><span class="line">  myenv</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<ol start="2">
+<li>local<br>可在所屬專案目錄下，指定專案Python版本，該目錄會出現.python-version 檔案，隨後即可以pip安裝package<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv <span class="hljs-built_in">local</span> myenv</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="啟動、退出、移除環境"><a href="#啟動、退出、移除環境" class="headerlink" title="啟動、退出、移除環境"></a>啟動、退出、移除環境</h2><ol>
+<li><p>啟動環境</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv activate myenv</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>退出環境</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv deactivate</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>移除環境</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall myenv</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>從參考文章<a target="_blank" rel="noopener" href="https://blog.kyomind.tw/pyenv-setup/">告別 Anaconda：在 macOS 上使用 pyenv 建立 Python 開發環境</a> 看到註解</p>
+<blockquote>
+<p>「不同 Python 版本間的虛擬環境管理」和「不同專案間的虛擬環境管理」基本上是兩件事，只不過 Anaconda 透過 conda 同時都能做到而已。</p>
+</blockquote>
+<p>實際以pyenv + virtualenv操作後更能瞭解該說明，是以往僅使用conda來管理環境時沒有思考過的事。</p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/python/">#python</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/pyenv/">#pyenv</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Anaconda/">#Anaconda</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/articles/2022/06/23/%5B%E7%88%AC%E8%9F%B2%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9%5Dpart2/">【爬蟲基礎介紹】part2: HTTP架構</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    <script src="https://utteranc.es/client.js"
+        repo="Dawn0472/Dawn0472.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Dawn&nbsp;
+                Разработано на базе <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-TW");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>
